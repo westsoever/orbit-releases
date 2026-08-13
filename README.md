@@ -1,0 +1,130 @@
+# Orbit
+
+Always-on agentic system for macOS. Captures your working context via the Accessibility API (no
+screenshots by default), stores it locally, detects tasks, and dispatches approved work to an LLM
+agent.
+
+- **Before:** You asked AI — and it gave you the right answer.
+- **Now:** It sees what you did — and knows what you want.
+
+> *A mediocre model with perfect context outperforms a frontier model starting from zero every session.*
+
+This repository distributes **prebuilt binaries only**. Orbit's source code is closed and lives
+in a separate private repository — this repo exists so anyone can install and run the app without
+needing source access.
+
+**Status: early beta.** Read [Current state](#current-state) before installing.
+
+---
+
+## Install (macOS 14+)
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/westsoever/orbit-releases/main/install.sh | bash
+```
+
+Skip auto-launch after install:
+
+```bash
+ORBIT_NO_START=1 curl -fsSL https://raw.githubusercontent.com/westsoever/orbit-releases/main/install.sh | bash
+```
+
+Install a specific version instead of the latest:
+
+```bash
+ORBIT_VERSION=0.1.0 curl -fsSL https://raw.githubusercontent.com/westsoever/orbit-releases/main/install.sh | bash
+```
+
+When finished you should have:
+
+- `/Applications/Orbit.app` — open from Spotlight or Dock
+- `orbit` on your PATH (symlinked to `/usr/local/bin/orbit`)
+
+User data lives in `~/.orbit/` (database, policy, logs) and survives app upgrades.
+
+Prefer to do it by hand? Download the zip from [Releases](https://github.com/westsoever/orbit-releases/releases), unzip, and drag `Orbit.app` into `/Applications`.
+
+### First launch
+
+1. **Gatekeeper.** This build is not yet notarized by Apple. If macOS says the app is from an
+   unidentified developer: right-click **Orbit** in `/Applications` → **Open**, or run:
+   ```bash
+   xattr -cr /Applications/Orbit.app
+   open -a Orbit
+   ```
+2. **Accessibility permission.** System Settings → Privacy & Security → **Accessibility** → enable
+   **Orbit**. Capture will not work without this — see [docs/PERMISSIONS.md](docs/PERMISSIONS.md).
+3. **Start capture.** In the Orbit sidebar under **CAPTURE**, click **Start**.
+
+Verify the install:
+
+```bash
+orbit doctor
+curl -s http://127.0.0.1:8765/health    # {"ok": true} when the daemon is running
+```
+
+### Connect an AI model
+
+Orbit's chat works with any of:
+
+- **A local Ollama model** (recommended — private, free, runs on your Mac). See
+  [docs/local-model-ollama.md](docs/local-model-ollama.md).
+- **Your own OpenRouter API key** (`OPENROUTER_API_KEY` in `~/.orbit/.env`).
+- **Hosted Cloud AI** — no setup, rate-limited.
+
+Pick a provider the first time you open Chat, or later in Settings.
+
+### Update or reinstall
+
+Re-run the install command — it removes the old `/Applications/Orbit.app` first. Data in
+`~/.orbit/` is kept unless you delete it yourself.
+
+### Uninstall
+
+```bash
+orbit stop 2>/dev/null || true
+rm -rf /Applications/Orbit.app /usr/local/bin/orbit
+# Optional — delete all captured data:
+# rm -rf ~/.orbit
+```
+
+---
+
+## What it does
+
+1. **Capture** — reads the active window's on-screen text via the macOS Accessibility API and
+   stores it locally. No screenshots by default.
+2. **Search** — hybrid search over your own captured history.
+3. **Detect** — an LLM looks at your recent captures and suggests tasks worth doing.
+4. **Approve** — you review and approve (or skip) each suggestion before anything runs.
+5. **Dispatch** — approved tasks run and their output is saved locally.
+
+## Privacy basics
+
+- **Local-first:** capture data stays in `~/.orbit/` on your device.
+- **No screenshots by default** — text via the Accessibility API only; an opt-in OCR fallback
+  never stores image files.
+- **Exclusion list** by app (edit `~/.orbit/policy.json` to add your own — see
+  [docs/PERMISSIONS.md](docs/PERMISSIONS.md)).
+- **Your data, your export:** `orbit privacy export` / `delete` / `purge` from the CLI.
+- A full privacy policy is in progress and will be linked here before this leaves beta.
+
+## Current state
+
+This is an early beta, not a polished consumer release yet:
+
+- **Unsigned build** — ad-hoc signed only, not notarized. Expect the Gatekeeper prompt above on
+  first launch.
+- **Local storage is not yet encrypted at rest.** Treat `~/.orbit/orbit.db` like any other local
+  file with your activity in it until this changes.
+- **macOS 14+ (Sonoma or later)** only, Apple Silicon or Intel.
+- Install is a few minutes on a good connection; first Ollama model pull is separate and can take
+  longer depending on model size.
+
+## Support
+
+Found a bug or something confusing during install? [Open an issue](https://github.com/westsoever/orbit-releases/issues).
+
+## License
+
+See [LICENSE](LICENSE) — draft, pending legal review.
