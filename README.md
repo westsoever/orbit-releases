@@ -1,11 +1,12 @@
 # Orbit
 
-Always-on agentic system for macOS. Captures your working context via the Accessibility API (no
-screenshots by default), stores it locally, detects tasks, and dispatches approved work to an LLM
-agent.
+Orbit is a personal assistant for macOS that understands who you are and how you work. Instead of
+starting from a blank prompt every time, it quietly builds context from what you're actually doing
+— captured locally via the Accessibility API (no screenshots by default) — and turns that context
+into tasks it can do for you.
 
-- **Before:** You asked AI — and it gave you the right answer.
-- **Now:** It sees what you did — and knows what you want.
+- **Before:** You asked AI — and it gave you the right answer to the question you managed to ask.
+- **Now:** It's already seen what you're working on — so it knows what you actually need.
 
 > *A mediocre model with perfect context outperforms a frontier model starting from zero every session.*
 
@@ -93,9 +94,11 @@ rm -rf /Applications/Orbit.app /usr/local/bin/orbit
 ## What it does
 
 1. **Capture** — reads the active window's on-screen text via the macOS Accessibility API and
-   stores it locally. No screenshots by default.
+   stores it locally. No screenshots by default. This is how Orbit learns who you are and how you
+   work — not from a profile you fill out, but from what you actually do.
 2. **Search** — hybrid search over your own captured history.
-3. **Detect** — an LLM looks at your recent captures and suggests tasks worth doing.
+3. **Detect** — an LLM looks at your recent captures and suggests tasks worth doing, informed by
+   that context instead of a cold prompt.
 4. **Approve** — you review and approve (or skip) each suggestion before anything runs.
 5. **Dispatch** — approved tasks run and their output is saved locally.
 
