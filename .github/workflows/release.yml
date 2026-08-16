@@ -1,0 +1,56 @@
+name: Release
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-macos:
+    # macos-14 ships Xcode 15.4 (Swift 5.10), which cannot compile the PLCrashReporter
+    # dependency pulled in by PostHog/Sentry: its Objective-C sources fail inside the
+    # system Foundation headers with `@class NSString;` → "expected unqualified-id",
+    # 20 errors before it gives up. Nothing in this repo can fix that from the outside —
+    # the toolchain is simply too old. Local builds use Swift 6.3.
+    runs-on: macos-15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Python 3.13
+        run: brew install python@3.13
+
+      # Absolute path on purpose. build-app-bundle.sh cds into the Swift package to
+      # compile, so a bare `Orbit.app` resolved against the wrong directory mid-build
+      # and failed at the binary copy. The script now normalises this itself, but
+      # passing an absolute path keeps the workflow correct on older checkouts too.
+      - name: Build Orbit.app
+        run: bash scripts/build-app-bundle.sh --output "$GITHUB_WORKSPACE/Orbit.app"
+
+      - name: Create release zip
+        run: ditto -c -k --keepParent "$GITHUB_WORKSPACE/Orbit.app" Orbit-darwin.zip
+
+      # Attach to the release that triggered this run, in THIS repo. It previously
+      # published to westsoever/orbit-releases while scripts/install.sh downloaded
+      # from westsoever/orbit (install.sh:13,84) — so the asset never appeared where
+      # the installer looked, and the step needed a cross-repo PAT that could expire
+      # silently. `orbit` is public as of 2026-08-16, so the split has no purpose:
+      # code and binaries now live together and no extra token is involved.
+      # `orbit-releases` keeps only the published legal documents, which the app's
+      # About panel links to.
+      - name: Attach zip to the release
+        if: github.event_name == 'release'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.event.release.tag_name }}
+          files: Orbit-darwin.zip
+
+      - name: Upload workflow artifact
+        if: github.event_name == 'workflow_dispatch'
+        uses: actions/upload-artifact@v4
+        with:
+          name: Orbit-darwin
+          path: Orbit-darwin.zip

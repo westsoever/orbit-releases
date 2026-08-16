@@ -1,0 +1,11 @@
+{
+  "manifest_version": 3,
+  "name": "Orbit Browser Companion",
+  "version": "0.1.0",
+  "description": "Sends active tab title and URL to your local Orbit daemon (127.0.0.1 only). No cloud.",
+  "permissions": ["tabs", "activeTab", "scripting"],
+  "host_permissions": ["http://127.0.0.1:8765/*"],
+  "background": {
+    "service_worker": "background.js"
+  }
+}

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>en</string>
+	<key>CFBundleExecutable</key>
+	<string>OrbitAccessApp</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.orbit.access</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>Orbit Access</string>
+	<key>CFBundleIconFile</key>
+	<string>AppIcon</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0</string>
+	<key>CFBundleVersion</key>
+	<string>1</string>
+	<key>LSMinimumSystemVersion</key>
+	<string>14.0</string>
+	<key>NSHumanReadableCopyright</key>
+	<string>Copyright © 2026 Orbit. All rights reserved.</string>
+	<key>NSPrincipalClass</key>
+	<string>NSApplication</string>
+	<key>LSUIElement</key>
+	<false/>
+	<!-- Orbit must survive being windowless: closing the main window is state B (menu-bar
+	     resident, daemon still capturing), not a hint that the app is idle. AppKit otherwise
+	     opts the process into Automatic Termination as soon as the last window closes and the
+	     system quits it on the next app switch, stopping capture. Paired with
+	     ProcessInfo.disableAutomaticTermination(_:) in AppDelegate. -->
+	<key>NSSupportsAutomaticTermination</key>
+	<false/>
+</dict>
+</plist>

@@ -1,0 +1,25 @@
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.venv/
+*.db
+*.db-wal
+*.db-shm
+.env
+.orbit-test-tmp/
+OrbitAccessApp/.build/
+OrbitAccessApp/.swiftpm/
+OrbitAccessApp/OrbitAccessApp.app/
+OrbitAccessApp/.tmp/
+build/
+.claude-flow/
+.DS_Store
+.memdb/
+
+# Memtrace local graph index + runtime state (never commit)
+.memtrace/
+.memtrace-workspace
+
+# Local git worktrees (agent-created, machine-local checkouts)
+.claude/worktrees/

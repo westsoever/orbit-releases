@@ -1,17 +1,59 @@
-Approved for publication by the product owner on 2026-08-13. Formal legal review is
-scheduled for the week of 2026-08-17 and may still change terms below.
+DRAFT — PENDING LEGAL REVIEW. Do not treat this as a final, counsel-approved license.
+This file exists to close launch-blocker #4 (no top-level LICENSE) and to give counsel a
+concrete starting point; it is not authorized for public release until reviewed and signed
+off per docs/gdpr/LEGAL_REVIEW_CHECKLIST.md.
+
+Orbit Source Repository License
 
 Copyright (c) 2026 westsoever. All rights reserved.
 
-This repository distributes prebuilt binary releases of the Orbit application for macOS.
-No source code is included in or licensed under this repository.
+This repository ("Orbit") contains the proprietary source code, design documents, and
+related materials for the Orbit application. It is source-available to explicitly
+authorized collaborators only — it is not open source, and no license to use, copy,
+modify, merge, publish, distribute, sublicense, or sell copies of this source code is
+granted to the public.
 
-Permission is granted to any individual to download and run the software distributed here
-for personal, non-commercial use, provided that you do not redistribute, resell, reverse
-engineer, or repackage the binary without prior written permission from the copyright holder.
+Prebuilt binary releases of the compiled application are distributed separately under
+their own license — see https://github.com/westsoever/orbit-releases/blob/main/LICENSE
+("Orbit Binary Distribution License"). Nothing in that separate license grants any right
+to this source repository, and nothing in this file grants any right to use the compiled
+application beyond what the binary distribution license permits.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING
-BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-DAMAGES OR OTHER LIABILITY ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
-OR OTHER DEALINGS IN THE SOFTWARE.
+1. Grant of rights (authorized collaborators only)
+
+   Individuals or entities explicitly granted access to this repository by the copyright
+   holder may view, clone, and modify this source code solely for the purpose of
+   contributing to or evaluating Orbit on the copyright holder's behalf. No other rights
+   are granted. Access to this repository does not, by itself, constitute such
+   authorization.
+
+2. Restrictions
+
+   Except as expressly permitted in Section 1, no person may copy, reproduce,
+   redistribute, publish, sublicense, sell, rent, lease, or create derivative works from
+   this source code, in whole or in part, without prior written permission from the
+   copyright holder.
+
+3. No warranty
+
+   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+   INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+   PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+   HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY ARISING FROM, OUT OF OR IN
+   CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+4. Third-party components
+
+   This repository incorporates third-party open-source dependencies (see
+   `pyproject.toml`, `OrbitAccessApp/Package.swift`) each under their own license.
+   This license does not alter those terms.
+
+Open questions for counsel:
+- Confirm "source-available, all rights reserved" is the right posture given the repo is
+  currently private on GitHub and only the compiled binary ships publicly. If the source
+  repo is ever made public, this license needs re-review — a spectator being able to read
+  the code is a different exposure than a collaborator being able to modify it.
+- Confirm whether any vendored/bundled third-party code (e.g. `OrbitAccessApp/.build/`
+  checkouts such as GRDB.swift) requires attribution in a NOTICE file; those are build
+  artifacts, not committed dependencies, but the equivalent declared dependency (GRDB) may
+  still need attribution if statically linked into the shipped binary.

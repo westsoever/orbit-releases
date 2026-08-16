@@ -1,0 +1,40 @@
+[project]
+name = "orbit"
+# Single source of truth is orbit/__init__.py; setuptools AST-reads the attribute at build
+# time, so there is no duplicate literal here and nothing to keep in sync by hand.
+dynamic = ["version"]
+requires-python = ">=3.10"
+dependencies = [
+  "pyobjc-framework-Cocoa>=10.3.1",
+  "pyobjc-framework-ApplicationServices>=10.3.1",
+  "pyobjc-framework-FSEvents>=10.3.1",
+  "pyobjc-framework-Quartz>=10.3.1",
+  "pyobjc-framework-Vision>=10.3.1",
+  "sqlite-vec==0.1.9",
+  "sqlcipher3-wheels>=0.5.7",
+  "keyring>=25.0",
+  "sentry-sdk>=2.0",
+  "posthog>=3.0",
+  "sentence-transformers>=3.0",
+  "openai>=1.0",
+  "httpx>=0.27",
+  "mcp==2.0.0",
+]
+
+[tool.setuptools.dynamic]
+version = {attr = "orbit.__version__"}
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["orbit*"]
+
+[tool.setuptools.package-data]
+orbit = ["storage/schema.sql"]
+
+[project.scripts]
+orbit = "orbit.cli:main"
+orbit-mcp = "orbit.mcp.server:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
