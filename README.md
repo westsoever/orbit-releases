@@ -10,9 +10,12 @@ into tasks it can do for you.
 
 > *A mediocre model with perfect context outperforms a frontier model starting from zero every session.*
 
-This repository distributes **prebuilt binaries only**. Orbit's source code is closed and lives
-in a separate private repository — this repo exists so anyone can install and run the app without
-needing source access.
+Orbit's source code is public at **https://github.com/westsoever/orbit** — the app, the installer,
+and the release binaries all live there.
+
+**This repository** hosts Orbit's published legal documents — [LICENSE](LICENSE),
+[Privacy Policy](docs/PRIVACY_POLICY.md), [Terms of Service](docs/TERMS_OF_SERVICE.md) — which the
+app's About panel links to, and keeps older links working. It is no longer a distribution channel.
 
 **Status: early beta.** Read [Current state](#current-state) before installing.
 
@@ -21,19 +24,19 @@ needing source access.
 ## Install (macOS 14+)
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/westsoever/orbit-releases/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/westsoever/orbit/main/scripts/install.sh | bash
 ```
 
 Skip auto-launch after install:
 
 ```bash
-ORBIT_NO_START=1 curl -fsSL https://raw.githubusercontent.com/westsoever/orbit-releases/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/westsoever/orbit/main/scripts/install.sh | ORBIT_NO_START=1 bash
 ```
 
-Install a specific version instead of the latest:
+Install a specific version instead of the latest (latest release is `v0.1.0`):
 
 ```bash
-ORBIT_VERSION=0.1.0 curl -fsSL https://raw.githubusercontent.com/westsoever/orbit-releases/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/westsoever/orbit/main/scripts/install.sh | ORBIT_VERSION=0.1.0 bash
 ```
 
 When finished you should have:
@@ -43,7 +46,7 @@ When finished you should have:
 
 User data lives in `~/.orbit/` (database, policy, logs) and survives app upgrades.
 
-Prefer to do it by hand? Download the zip from [Releases](https://github.com/westsoever/orbit-releases/releases), unzip, and drag `Orbit.app` into `/Applications`.
+Prefer to do it by hand? Download `Orbit-darwin.zip` from [Releases](https://github.com/westsoever/orbit/releases), unzip, and drag `Orbit.app` into `/Applications`.
 
 ### First launch
 
@@ -110,7 +113,7 @@ rm -rf /Applications/Orbit.app /usr/local/bin/orbit
 - **Exclusion list** by app (edit `~/.orbit/policy.json` to add your own — see
   [docs/PERMISSIONS.md](docs/PERMISSIONS.md)).
 - **Your data, your export:** `orbit privacy export` / `delete` / `purge` from the CLI.
-- A full privacy policy is in progress and will be linked here before this leaves beta.
+- Full details: [Privacy Policy](docs/PRIVACY_POLICY.md).
 
 ## Current state
 
@@ -126,8 +129,11 @@ This is an early beta, not a polished consumer release yet:
 
 ## Support
 
-Found a bug or something confusing during install? [Open an issue](https://github.com/westsoever/orbit-releases/issues).
+Found a bug or something confusing during install? [Open an issue](https://github.com/westsoever/orbit/issues)
+on the main repository.
 
-## License
+## Legal
 
-See [LICENSE](LICENSE) — draft, pending legal review.
+- [LICENSE](LICENSE) — pending formal legal review.
+- [Privacy Policy](docs/PRIVACY_POLICY.md)
+- [Terms of Service](docs/TERMS_OF_SERVICE.md)
