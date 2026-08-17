@@ -1,59 +1,83 @@
 DRAFT — PENDING LEGAL REVIEW. Do not treat this as a final, counsel-approved license.
-This file exists to close launch-blocker #4 (no top-level LICENSE) and to give counsel a
-concrete starting point; it is not authorized for public release until reviewed and signed
-off per docs/gdpr/LEGAL_REVIEW_CHECKLIST.md.
 
-Orbit Source Repository License
+Business Source License 1.1
 
-Copyright (c) 2026 westsoever. All rights reserved.
+Licensor:             westsoever
+Licensed Work:        Orbit (this repository, including source code, build scripts,
+                       and compiled binary releases distributed from it)
+Additional Use Grant: You may use, copy, modify, and self-host the Licensed Work for
+                       personal or internal business purposes. You may not offer the
+                       Licensed Work, or a substantially similar product, to third
+                       parties as a hosted or managed service without a separate
+                       commercial license from the Licensor.
+Change Date:          2030-08-17 (four years from first public release)
+Change License:       Apache License, Version 2.0
 
-This repository ("Orbit") contains the proprietary source code, design documents, and
-related materials for the Orbit application. It is source-available to explicitly
-authorized collaborators only — it is not open source, and no license to use, copy,
-modify, merge, publish, distribute, sublicense, or sell copies of this source code is
-granted to the public.
+---
 
-Prebuilt binary releases of the compiled application are distributed separately under
-their own license — see https://github.com/westsoever/orbit-releases/blob/main/LICENSE
-("Orbit Binary Distribution License"). Nothing in that separate license grants any right
-to this source repository, and nothing in this file grants any right to use the compiled
-application beyond what the binary distribution license permits.
+Terms
 
-1. Grant of rights (authorized collaborators only)
+The Licensor hereby grants you the right to copy, modify, create derivative works,
+redistribute, and make non-production use of the Licensed Work. The Licensor may make
+an Additional Use Grant, above, permitting limited production use.
 
-   Individuals or entities explicitly granted access to this repository by the copyright
-   holder may view, clone, and modify this source code solely for the purpose of
-   contributing to or evaluating Orbit on the copyright holder's behalf. No other rights
-   are granted. Access to this repository does not, by itself, constitute such
-   authorization.
+Effective on the Change Date, or the fourth anniversary of the first publication of
+this version of the Licensed Work, whichever comes first, the Licensor hereby grants
+you rights under the terms of the Change License, and the rights granted in the
+paragraph above terminate.
 
-2. Restrictions
+If your use of the Licensed Work does not comply with the requirements currently in
+effect as described in this License, you must purchase a commercial license from the
+Licensor, its affiliated entities, or authorized resellers, or you must refrain from
+using the Licensed Work.
 
-   Except as expressly permitted in Section 1, no person may copy, reproduce,
-   redistribute, publish, sublicense, sell, rent, lease, or create derivative works from
-   this source code, in whole or in part, without prior written permission from the
-   copyright holder.
+All copies of the original and modified Licensed Work, and derivative works, are
+subject to this License. This License applies separately for each version of the
+Licensed Work, and the Change Date may vary for each version.
 
-3. No warranty
+You must conspicuously display this License on each original or modified copy of the
+Licensed Work. If you receive the Licensed Work in original or modified form from a
+third party, the terms and conditions set forth in this License apply to your use of
+that work.
 
-   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
-   INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
-   PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
-   HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY ARISING FROM, OUT OF OR IN
-   CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+Any use of the Licensed Work in violation of this License will automatically terminate
+your rights under this License for the current and all other versions of the Licensed
+Work.
 
-4. Third-party components
+This License does not grant you any right in any trademark or logo of the Licensor or
+its affiliates.
 
-   This repository incorporates third-party open-source dependencies (see
-   `pyproject.toml`, `OrbitAccessApp/Package.swift`) each under their own license.
-   This license does not alter those terms.
+TO THE EXTENT PERMITTED BY APPLICABLE LAW, THE LICENSED WORK IS PROVIDED ON AN "AS IS"
+BASIS. THE LICENSOR MAKES NO REPRESENTATIONS OR WARRANTIES OF ANY KIND CONCERNING THE
+LICENSED WORK, WHETHER EXPRESS, IMPLIED, STATUTORY, OR OTHER. THIS INCLUDES, WITHOUT
+LIMITATION, ANY WARRANTIES OF TITLE, MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE,
+NON-INFRINGEMENT, OR THE ABSENCE OF LATENT OR OTHER DEFECTS, ACCURACY, OR THE PRESENCE
+OR ABSENCE OF ERRORS, WHETHER OR NOT KNOWN OR DISCOVERABLE. TO THE EXTENT PERMITTED BY
+APPLICABLE LAW, IN NO EVENT WILL THE LICENSOR BE LIABLE TO YOU ON ANY LEGAL THEORY
+(INCLUDING NEGLIGENCE) OR OTHERWISE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY ARISING
+FROM, OUT OF, OR IN CONNECTION WITH THE LICENSED WORK OR THIS LICENSE, EVEN IF THE
+LICENSOR HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+
+MariaDB hereby grants you permission to use this License's text to license your works,
+and to refer to it using the trademark "Business Source License", as long as you comply
+with the Covenants of Licensor below.
+
+---
+
+Third-party components
+
+This repository incorporates third-party open-source dependencies (see
+`pyproject.toml`, `OrbitAccessApp/Package.swift`) each under their own license. This
+License does not alter those terms.
+
+---
 
 Open questions for counsel:
-- Confirm "source-available, all rights reserved" is the right posture given the repo is
-  currently private on GitHub and only the compiled binary ships publicly. If the source
-  repo is ever made public, this license needs re-review — a spectator being able to read
-  the code is a different exposure than a collaborator being able to modify it.
-- Confirm whether any vendored/bundled third-party code (e.g. `OrbitAccessApp/.build/`
-  checkouts such as GRDB.swift) requires attribution in a NOTICE file; those are build
-  artifacts, not committed dependencies, but the equivalent declared dependency (GRDB) may
-  still need attribution if statically linked into the shipped binary.
+- Confirm the Additional Use Grant wording matches how Orbit is actually distributed
+  (self-hosted single-user Mac app, not a hosted service) — the "no competing hosted
+  service" clause may be unnecessary boilerplate carried over from BUSL's typical
+  database-server use case.
+- Confirm the four-year Change Date and Apache 2.0 Change License are the terms
+  westsoever wants to commit to; both are freely adjustable.
+- Confirm whether any vendored/bundled third-party code (e.g. GRDB.swift, if statically
+  linked into the shipped binary) requires attribution in a separate NOTICE file.
